@@ -9,6 +9,7 @@ kaboom();
 
 // load assets
 loadSprite("bean", "sprites/bean.png");
+loadSound("meow", "sounds/meow.mp3");
 
 scene("game", () => {
 
@@ -60,7 +61,7 @@ scene("game", () => {
         ]);
 
         // wait a random amount of time to spawn next tree
-        wait(rand(0.5, 1.5), spawnTree);
+        wait(rand(1, 2), spawnTree);
 
     }
 
@@ -71,7 +72,7 @@ scene("game", () => {
     player.onCollide("tree", () => {
         // go to "lose" scene and pass the score
         go("lose", score);
-        burp();
+        play("meow")
         addKaboom(player.pos);
     });
 
@@ -102,7 +103,7 @@ scene("lose", (score) => {
 
     // display score
     add([
-        text(score),
+        text(`Game Over - ${score}`),
         pos(width() / 2, height() / 2 + 80),
         scale(2),
         anchor("center"),
